@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Finance Manager</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .chart-container {
+            width: 100%;
+            height: 300px;
+        }
+
+        .form-container {
+            margin-top: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .submit-btn {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .submit-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h1>Personal Finance Manager Dashboard</h1>
+        </div>
+
+        <div class="dashboard">
+            <!-- Income Section -->
+            <div class="card">
+                <h2>Income</h2>
+                <div class="chart-container">
+                    <canvas id="incomeChart"></canvas>
+                </div>
+                <div class="form-container">
+                    <form id="incomeForm">
+                        <div class="form-group">
+                            <label for="incomeAmount">Income Amount</label>
+                            <input type="number" id="incomeAmount" placeholder="Enter amount">
+                        </div>
+                        <div class="form-group">
+                            <label for="incomeSource">Income Source</label>
+                            <input type="text" id="incomeSource" placeholder="Enter source">
+                        </div>
+                        <button class="submit-btn" type="submit">Add Income</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Expenses Section -->
+            <div class="card">
+                <h2>Expenses</h2>
+                <div class="chart-container">
+                    <canvas id="expensesChart"></canvas>
+                </div>
+                <div class="form-container">
+                    <form id="expensesForm">
+                        <div class="form-group">
+                            <label for="expenseAmount">Expense Amount</label>
+                            <input type="number" id="expenseAmount" placeholder="Enter amount">
+                        </div>
+                        <div class="form-group">
+                            <label for="expenseCategory">Expense Category</label>
+                            <input type="text" id="expenseCategory" placeholder="Enter category">
+                        </div>
+                        <button class="submit-btn" type="submit">Add Expense</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Budget Section -->
+            <div class="card">
+                <h2>Budget</h2>
+                <div class="chart-container">
+                    <canvas id="budgetChart"></canvas>
+                </div>
+                <div class="form-container">
+                    <form id="budgetForm">
+                        <div class="form-group">
+                            <label for="budgetAmount">Set Budget</label>
+                            <input type="number" id="budgetAmount" placeholder="Enter budget">
+                        </div>
+                        <button class="submit-btn" type="submit">Set Budget</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Sample Data for Charts
+        const incomeData = [500, 800, 1000, 600];
+        const expensesData = [400, 500, 700, 300];
+        const budgetData = [1000, 1000, 1000, 1000];
+
+        // Income Chart
+        const incomeCtx = document.getElementById('incomeChart').getContext('2d');
+        const incomeChart = new Chart(incomeCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+                datasets: [{
+                    label: 'Income',
+                    data: incomeData,
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            }
+        });
+
+        // Expenses Chart
+        const expensesCtx = document.getElementById('expensesChart').getContext('2d');
+        const expensesChart = new Chart(expensesCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+                datasets: [{
+                    label: 'Expenses',
+                    data: expensesData,
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                }]
+            }
+        });
+
+        // Budget Chart
+        const budgetCtx = document.getElementById('budgetChart').getContext('2d');
+        const budgetChart = new Chart(budgetCtx, {
+            type: 'line',
+            data: {
+                labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+                datasets: [{
+                    label: 'Budget',
+                    data: budgetData,
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            }
+        });
+    </script>
+</body>
+
+</html>
